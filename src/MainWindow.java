@@ -267,16 +267,16 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			party = new Party(chooseYourCharacter("Choose your character!"));
 			music.playMesaRoom(); // FOR TEST just so the game does not crash when testing
 			
-			//song.play();
+			song.play();
 			say2(nar, 					"Not so long ago in the beautiful land of Seattle, surrounded by mountains and water, ",0);
 			printLine(); saySlow("         rumors spoke of an omnipotent Power that resided in a hidden land.", slow);
 			printLine(); saySlow("         Many people aggressively sought to enter the hidden land, But no one ever returned.", slow);sleep(1);
 			printLine();saySlow("                      One day, evil power began to flow from the Hidden Land...", normal); 
 			printLine();
 			changeBackground("mesaRoom.jpg");
-			//song.stop();
-			//song = music.mesaRoom;
-			//song.loop();
+			song.stop();
+			song = music.mesaRoom;
+			song.loop();
 			sleep(2);
 			printLine();
 			
@@ -391,7 +391,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			s1("True.");
 			printLine();
 			say(nar, name+ " and the gang starts heading towards the MESA room.", 4);
-			//switchSong(music.yugaTheme, "mesaRoom.jpg");
+			switchSong(music.yugaTheme, "mesaRoom.jpg");
 			printLine(); sleep(2);
 			printSlow( "********************Five minutes earlier: IN THE MESA ROOM****************");
 			say(Abdul, "Who are you?!", 2);
@@ -438,7 +438,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			s3("We'd like to see you try.");
 			song.stop();
 			party.addChar(chooseYourCharacter("Who will help??"));
-			//song = music.yugaTheme2;
+			song = music.yugaTheme2;
 			partyBattle(yuga, true);
 			
 			printLine();
@@ -465,7 +465,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 		
 		public void basement(){
 			
-			//switchSong(music.northPlaza, "basement.png");
+			switchSong(music.northPlaza, "basement.png");
 			sleep(3);
 			say(nar, "As you snap back to conciousness, you notice you're the only one there",3);
 			say(nar, "but you hear something coming from a dark corner...", 3);
@@ -521,7 +521,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			say(name, "Count me in!",1);
 			say(Matt, "Sweet. Let's get going!", 1);
 			say(Sebas, "Let's roll!",1);
-			//switchSong(music.cityStreet, "cityStreet.png");
+			switchSong(music.cityStreet, "cityStreet.png");
 			showParty = true;
 			showInventory = true;
 			printSlow("***********Walking down Broadway to get Chipotle*************");
@@ -591,7 +591,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			
 			printLine();
 			say(nar, "After a short walk, they arrive at Chipotle", 2); printLine();
-			//switchSong(music.shopTheme,"chipotle.jpg");
+			switchSong(music.shopTheme,"chipotle.jpg");
 			printSlow("***********************Inside Chipotle************************");		
 			printLine();
 			
@@ -661,7 +661,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 				}
 			
 				say(Sebas, "Alright, let's head back so we can eat, I don't think i can wait much longer",3);
-				//switchSong(music.cityStreet,"cityStreet2.png");
+				switchSong(music.cityStreet,"cityStreet2.png");
 				say(Matt, "Just eat some as we walk, it would be much more efficient if you're 'starving'.",3);
 				printLine();
 				say(nar, name+ " and company headed back to North Plaza", 2);
@@ -684,7 +684,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 				say(Sebas, "Wow, okay, calm down buddy", 3);
 				say(name, "oh god..",2);
 				say(Matt, "*Ahem* Alright alright, enough joking around, you two. let's go.",3);
-				//switchSong(music.northPlaza,"backEntrance.png");
+				switchSong(music.northPlaza,"backEntrance.png");
 				printLine();
 				say(nar, "The three walk in through the back door and towards the mesa room, but they hear something",3);
 				printLine();
@@ -792,8 +792,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 		 			
 			}//end switch
 		
-		
-		//switchSong(music.cityStreet,"cityStreet.png");
+		switchSong(music.cityStreet,"cityStreet.png");
 		showParty = true;
 		showInventory = true;
 		printSlow("***********Walking up Broadway to get some coffee at Vivache*************");
@@ -824,7 +823,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 		printLine();
 		say(nar, "After a short walk, the group enters the coffee shop",2);
 		printLine();
-		//switchSong(music.vivace, "vivace.jpg");
+		switchSong(music.vivace, "vivace.jpg");
 		printSlow("****************Vivace****************");
 		printLine();
 		sleep(1);
@@ -915,7 +914,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 
 
 			say(Fran, "Alright, let's head out!!",3);
-			//switchSong(music.cityStreet, "cityStreet2.png");
+			switchSong(music.cityStreet, "cityStreet2.png");
 			
 			say(Julia, "Phew, I guess this White Velvet will have to replace my need for coffee, It's just too good",3);
 			pauseSay(Fran, "I must agree."," How do you like your "+item1+", "+name+"?", normal);
@@ -946,7 +945,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			say(Julia, "oh god..",2);
 			say(Julia, "Alright alright, enough joking around, you two. let's go.",3);
 			printLine();
-			//switchSong(music.northPlaza,"backEntrance.png");
+			switchSong(music.northPlaza,"backEntrance.png");
 			say(nar, "The three walk in through the back door and towards the mesa room, but they hear something",3);
 			printLine();
 			s1("What was that?");
@@ -1391,7 +1390,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 					ehpColor = Color.green;
 					battleInProgress = false;
 					sleep(1);
-					//song.loop(); //starts looping the story song playing before the battle
+					song.loop(); //starts looping the story song playing before the battle
 					php = 0;
 					ehp = 0;
 					won = true;
@@ -1420,7 +1419,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 
 					battleInProgress = false;
 					sleep(1);
-					//song.loop();
+					song.loop();
 					php = 0;
 					ehp = 0;
 					return won;
@@ -1542,7 +1541,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			sleep(2);
 		}
 		
-		/*
+		
 		public void switchSong(AudioClip newSong, String background){
 			sleep(1);
 			song.stop();
@@ -1552,7 +1551,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			
 			song = newSong;
 			song.loop();
-		}*/
+		}
 		
 		public static void waitForKeyPress(){
 			System.out.println("Waiting...    ");

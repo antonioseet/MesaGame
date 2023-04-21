@@ -223,7 +223,7 @@ public class Battle extends Announcer{
 		window.printLine(char1.name+" used "+char1.standard.attackName);
 		sleep(txt);
 		if(rand.nextInt(99)<10){
-			//PlayerCritAnimation(anounce, music.atkSound);
+			PlayerCritAnimation(anounce, music.atkSound);
 			damageDone = char1.standard.damage * char1.attack * enemy1.defense*1.5 + rand.nextInt(14);
 			window.printLine("CRITICAL HIT!!");
 		}else if(rand.nextInt(99)<15){
@@ -231,7 +231,7 @@ public class Battle extends Announcer{
 			damageDone = 0;
 			window.printLine(char1.name+"'s "+char1.standard.attackName+" missed!!");
 		}else{
-			//PlayerAttackAnimation(anounce, music.atkSound);
+			PlayerAttackAnimation(anounce, music.atkSound);
 			damageDone = char1.standard.damage * char1.attack * enemy1.defense + rand.nextInt(10);
 		}
 		enemy1.lostHP(damageDone);
@@ -274,7 +274,7 @@ public class Battle extends Announcer{
 				window.printLine(enemy1.name + "'s " + a + " missed!!");
 			}else{
 				sleep(.5);
-				//EnemySpecialAnimation(anounce, music.atkSound);
+				EnemySpecialAnimation(anounce, music.atkSound);
 				damageDone = (enemy1.spell.damage * enemy1.spAttack * char1.spDefense) + rand.nextInt(15);
 			}
 			
@@ -285,7 +285,7 @@ public class Battle extends Announcer{
 				window.printLine(enemy1.name + "'s " + a + " missed!!");
 			}else{
 				sleep(.5);
-				//EnemyAttackAnimation(anounce, music.atkSound);
+				EnemyAttackAnimation(anounce, music.atkSound);
 				damageDone = (enemy1.standard.damage * enemy1.attack * char1.defense) + rand.nextInt(15);
 			}
 		}
@@ -360,7 +360,7 @@ private void spell(){
 				window.printLine(char1.name+"'s "+char1.spell.spellName+" missed!!");
 			}else{
 				sleep(.5);
-				//PlayerSpecialAttackAnimation(anounce, music.splSound);
+				PlayerSpecialAttackAnimation(anounce, music.splSound);
 				damageDone = char1.spell.damage * char1.spAttack * enemy1.spDefense + rand.nextInt(10);
 			}
 			
@@ -426,7 +426,7 @@ private void spell(){
 		if(bossBattle){
 			//TODO make sure to add the boss music according to boss.
 			if(enemy1.name.equals("Yuga")){
-			//clip = 	music.yugaBattle;
+			clip = 	music.yugaBattle;
 			}
 			
 			
@@ -523,7 +523,7 @@ private void spell(){
 		sleep(2);
 		if(expGainn >= party.party.get(i).nextLevelExp){
 			do{
-				//music.SFXlevelUP.play();
+				music.SFXlevelUP.play();
 				party.party.get(i).level++;
 				window.printLine("***"+party.party.get(i).name+" went up to Level "+ party.party.get(i).level + "!***");
 				sleep(1);
