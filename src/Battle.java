@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.sound.sampled.Clip;
 import javax.swing.JOptionPane;
 
 import uwcse.graphics.Rectangle;
@@ -13,7 +14,7 @@ import uwcse.graphics.Rectangle;
 
 public class Battle extends Announcer{
 	
-	private AudioClip clip;
+	private Clip clip;
 	private boolean passOnce = true;//makes sure you only populate the intro and outro phrasesonce per battle
 	private ArrayList<String> winPhrases = new ArrayList<String>();
 	private ArrayList<String> introPhrases = new ArrayList<String>();
@@ -426,25 +427,13 @@ private void spell(){
 		if(bossBattle){
 			//TODO make sure to add the boss music according to boss.
 			if(enemy1.name.equals("Yuga")){
-			clip = 	music.yugaBattle;
+				clip = 	music.yugaBattle;
 			}
 			
-			
-			
-			
-			
-			clip.loop();
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		}else{
-			int n =(int)(Math.random()*17)+1;
-			String s = "Battle"+n+".wav";
-			try {
-		      clip = Applet.newAudioClip(new URL("file:" +s));
-		    }
-		    catch (Exception e) {
-		      window.printLine("Error reading file: " + e);
-		    }
-		
-		clip.loop();
+			clip = music.getRandomBattleTheme();
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		}
 		
 		
@@ -523,7 +512,7 @@ private void spell(){
 		sleep(2);
 		if(expGainn >= party.party.get(i).nextLevelExp){
 			do{
-				music.SFXlevelUP.play();
+				music.SFXlevelUP.start();
 				party.party.get(i).level++;
 				window.printLine("***"+party.party.get(i).name+" went up to Level "+ party.party.get(i).level + "!***");
 				sleep(1);
@@ -554,18 +543,12 @@ private void spell(){
 	public void endBattleSong(boolean won){
 		String s;
 		if(won){
-			s = "Victory.wav";
+			clip = music.victory;
 		}else{
-			s = "Loss.wav";
+			clip = music.loss;
 		}
 		
-		try {
-		      clip = Applet.newAudioClip(new URL("file:" +s));
-		    }
-		    catch (Exception e) {
-		      window.printLine("Error reading file: " + e);
-		    }
-		clip.play();
+		clip.start();
 	}
 	
 	
@@ -835,11 +818,11 @@ private void spell(){
 	/**
 	 * Attack Animation Choreography for the characters fighting
 	 */
-	private void PlayerAttackAnimation(Announcer a, AudioClip sound){
+	private void PlayerAttackAnimation(Announcer a, Clip sound){
 
 		char1.sprite.moveBy(20, 0);
 		enemy1.sprite.moveBy(0, 10);
-		sound.play();
+		sound.start();
 		sleep(.1);
 		enemy1.sprite.moveBy(10, 0);
 		a.hitClip();
@@ -851,11 +834,11 @@ private void spell(){
 		
 	}
 	
-	private void PlayerCritAnimation(Announcer a, AudioClip sound){
+	private void PlayerCritAnimation(Announcer a, Clip sound){
 		
 		char1.sprite.moveBy(20, 0);
 		enemy1.sprite.moveBy(0, 20);
-		sound.play();
+		sound.start();
 		sleep(.1);
 		enemy1.sprite.moveBy(20, 0);
 		
@@ -890,11 +873,11 @@ private void spell(){
 	}
 	
 	
-	private void EnemyAttackAnimation(Announcer a, AudioClip sound){
+	private void EnemyAttackAnimation(Announcer a, Clip sound){
 		
 		enemy1.sprite.moveBy(-20, 0);
 		sleep(.1);
-		sound.play();
+		sound.start();
 		char1.sprite.moveBy(-10, 0);
 		sleep(.3);
 		a.hitClip();
@@ -915,10 +898,10 @@ private void spell(){
 		
 	}
 	
-	private void EnemySpecialAnimation(Announcer a, AudioClip sound){
+	private void EnemySpecialAnimation(Announcer a, Clip sound){
 		enemy1.sprite.moveBy(-20,-0);
 		sleep(.3);
-		sound.play();
+		sound.start();
 		enemy1.sprite.moveBy(50, 0);
 		char1.sprite.moveBy(-30, 0);
 		a.hitClip();
@@ -930,11 +913,11 @@ private void spell(){
 	}
 	
 	
-	private void PlayerSpecialAttackAnimation(Announcer a, AudioClip sound){
+	private void PlayerSpecialAttackAnimation(Announcer a, Clip sound){
 		
 		char1.sprite.moveBy(-20, -10);
 		sleep(.2);
-		sound.play();
+		sound.start();
 		char1.sprite.moveBy(50,10);
 		enemy1.sprite.moveBy(30, 10);
 		a.hitClip();

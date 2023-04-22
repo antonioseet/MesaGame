@@ -265,18 +265,19 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			setAllSprites();
 			setAllChars();
 			party = new Party(chooseYourCharacter("Choose your character!"));
-			music.playMesaRoom(); // FOR TEST just so the game does not crash when testing
-			
-			song.play();
+
+			music.currentSong = music.thunder;
+			music.playCurrent();
 			say2(nar, 					"Not so long ago in the beautiful land of Seattle, surrounded by mountains and water, ",0);
 			printLine(); saySlow("         rumors spoke of an omnipotent Power that resided in a hidden land.", slow);
 			printLine(); saySlow("         Many people aggressively sought to enter the hidden land, But no one ever returned.", slow);sleep(1);
 			printLine();saySlow("                      One day, evil power began to flow from the Hidden Land...", normal); 
 			printLine();
 			changeBackground("mesaRoom.jpg");
-			song.stop();
-			song = music.mesaRoom;
-			song.loop();
+			music.stopCurrentSong();
+			//song = music.mesaRoom;
+			//song.loop();
+			music.switchSong(music.mesaRoom);
 			sleep(2);
 			printLine();
 			
@@ -1390,7 +1391,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 					ehpColor = Color.green;
 					battleInProgress = false;
 					sleep(1);
-					song.loop(); //starts looping the story song playing before the battle
+					song.loop(Clip.LOOP_CONTINUOUSLY); //starts looping the story song playing before the battle
 					php = 0;
 					ehp = 0;
 					won = true;
@@ -1419,7 +1420,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 
 					battleInProgress = false;
 					sleep(1);
-					song.loop();
+					song.loop(Clip.LOOP_CONTINUOUSLY);
 					php = 0;
 					ehp = 0;
 					return won;
@@ -1542,15 +1543,14 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 		}
 		
 		
-		public void switchSong(AudioClip newSong, String background){
+		public void switchSong(Clip newSong, String background){
 			sleep(1);
 			song.stop();
 			changeBackground(background);
-			music.SFXdoorSound.play();
+			music.playDoor();
 			sleep(2);
 			
-			song = newSong;
-			song.loop();
+			music.switchSong(newSong);
 		}
 		
 		public static void waitForKeyPress(){
