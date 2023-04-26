@@ -14,7 +14,7 @@ import uwcse.graphics.Rectangle;
 
 public class Battle extends Announcer{
 	
-	private Clip clip;
+	//private Clip clip;
 	private boolean passOnce = true;//makes sure you only populate the intro and outro phrasesonce per battle
 	private ArrayList<String> winPhrases = new ArrayList<String>();
 	private ArrayList<String> introPhrases = new ArrayList<String>();
@@ -55,6 +55,8 @@ public class Battle extends Announcer{
 	
 	private MainWindow window;
 	
+	private Clip songToRestore;
+	
 	
 	
 	public boolean Battle(Character character, Enemy enemy, boolean bossBattle, MainWindow adVwindow, Party part){
@@ -72,7 +74,7 @@ public class Battle extends Announcer{
 		
 		//Start music
 		Announcer announcer = new Announcer();
-		
+		// TODO: music.stopCurrentSong(); This is not stopping the song that's playing. figure out why.
 		initiateMusic(bossBattle);
 		
 		//Show FIGHT banner
@@ -423,17 +425,15 @@ private void spell(){
 	 */
 	private void initiateMusic(boolean bossBattle){
 		//Choose between 5 different tracks
-		
+		songToRestore = music.currentSong;
 		if(bossBattle){
 			//TODO make sure to add the boss music according to boss.
 			if(enemy1.name.equals("Yuga")){
-				clip = 	music.yugaBattle;
+				music.switchSong(music.yugaBattle);
 			}
 			
-			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		}else{
-			clip = music.getRandomBattleTheme();
-			clip.loop(Clip.LOOP_CONTINUOUSLY);
+			music.switchSong(music.getRandomBattleTheme());
 		}
 		
 		
@@ -447,7 +447,7 @@ private void spell(){
 	 * -Checks for level ups
 	 */
 	private void endBattle(boolean wonBattle){
-		clip.stop();
+		music.switchSong(songToRestore);
 		window.printLine(""); 
 		Random ran1 = new Random();
 		if(wonBattle){
@@ -541,16 +541,11 @@ private void spell(){
 	 * @param won
 	 */
 	public void endBattleSong(boolean won){
-		String s;
-		if(won){
-			clip = music.victory;
-		}else{
-			clip = music.loss;
-		}
-		
-		clip.start();
+		if(won)
+			music.playVictory();
+		else
+			music.playLoss();
 	}
-	
 	
 	private void showBothHP(Character char1, Enemy enemy1){
 		showHP(enemy1.name, enemy1.HP);
@@ -566,11 +561,10 @@ private void spell(){
 	 */
 	private void showHP(String name, int HP){
 		window.printLine();
-	
 		
-		if(HP<0){
+		if(HP<0)
 			HP =0;
-		}
+		
 		window.printLine(name +": " + HP + "HP");
 		sleep(.07);
 		window.printLine("HP: ");
@@ -578,9 +572,7 @@ private void spell(){
 			sleep(.013);
 			window.print("|");
 		}
-		
 	}
-	
 	
 	/**
 	 * Updates the HP BARS based on health lost or gained

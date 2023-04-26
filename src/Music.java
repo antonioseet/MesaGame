@@ -23,6 +23,7 @@ public class Music {
 	public Clip SFXlevelUP;
 	public Clip victory;
 	public Clip loss;
+	public Clip item;
 	
 	public ArrayList<Clip> battleThemes = new ArrayList<Clip>();
 	
@@ -47,7 +48,8 @@ public class Music {
             SFXlevelUP = getClipFromUrl("file:doorSound.wav");
             victory = getClipFromUrl("file:doorSound.wav");
             loss = getClipFromUrl("file:doorSound.wav");
-            
+            item = getClipFromUrl("file:itemGet.wav");
+            currentSong = mesaRoom;
             
             for(int i = 1; i <= 17; i++) {
             	battleThemes.add(getClipFromUrl("file:Battle" + i + ".wav"));
@@ -81,6 +83,7 @@ public class Music {
     }
     
     public void switchSong(Clip newSong) {
+    	currentSong.stop();
     	currentSong = newSong;
     	currentSong.loop(Clip.LOOP_CONTINUOUSLY);
     }
@@ -88,39 +91,16 @@ public class Music {
     public void playDoor() {
     	door.start();
     }
-
-    public void playMesaRoom() {
-        mesaRoom.setFramePosition(0);
-        mesaRoom.loop(Clip.LOOP_CONTINUOUSLY);
+    
+    public void itemGet() {
+    	item.start();
     }
-
-    public void playCityStreet() {
-        cityStreet.setFramePosition(0);
-        cityStreet.start();
+    
+    public void playVictory() {
+    	victory.start();
     }
-
-    public void playShopTheme() {
-        shopTheme.setFramePosition(0);
-        shopTheme.start();
-    }
-
-    public void playVivace() {
-        vivace.setFramePosition(0);
-        vivace.start();
-    }
-
-    public void playNorthPlaza() {
-        northPlaza.setFramePosition(0);
-        northPlaza.start();
-    }
-
-    public void playYugaTheme() {
-        yugaTheme.setFramePosition(0);
-        yugaTheme.start();
-    }
-
-    public void playYugaTheme2() {
-        yugaTheme2.setFramePosition(0);
-        yugaTheme2.start();
+    
+    public void playLoss() {
+    	loss.start();
     }
 }

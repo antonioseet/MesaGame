@@ -84,7 +84,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 		private double slow = .07;
 		private double normal = .04;
 		
-		private Clip song;
+		//private Clip song;
 
 		////////end of window fields//////
 		
@@ -128,7 +128,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 		//////MAIN CHARACTER/////
 		private Character mainChar;
 		private String name;
-		private double money = 20.22;
+		private double money = 25.22;
 		
 		
 		
@@ -234,30 +234,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			basement();
 			
 		}
-		
-		/**
-		public void whatIsTonyDoing(){
-			
-			ArrayList<String> sentences = new ArrayList<String>();
-			sentences.add("Tony is thinking about Joe");
-			sentences.add("Tony is thinking about Joe's cute butt");
-			sentences.add("Tony is thinking about Joe's gorgeous eyes");
-			sentences.add("Tony is probably texting Joe, or waiting on her to reply");
-			sentences.add("Tony is sleepy and taking a nap, or doing work, definitely not playing League");
-			
-			printLine("_____________________________________________");
-			printLine("        WHHAT IS TONY DOING RIGHT NOW"        );
-			printLine("_____________________________________________");
-			sleep(10);
-			
-			while (true){
-				int n = (int)(Math.random()*5);
-				printSlow(sentences.get(n));
-				
-				sleep(1);
-			}	
-		}
-		**/
+
 		
 		
 		public void prologue(){
@@ -265,9 +242,9 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			setAllSprites();
 			setAllChars();
 			party = new Party(chooseYourCharacter("Choose your character!"));
-
-			music.currentSong = music.thunder;
-			music.playCurrent();
+			
+			music.switchSong(music.thunder);
+			test();
 			say2(nar, 					"Not so long ago in the beautiful land of Seattle, surrounded by mountains and water, ",0);
 			printLine(); saySlow("         rumors spoke of an omnipotent Power that resided in a hidden land.", slow);
 			printLine(); saySlow("         Many people aggressively sought to enter the hidden land, But no one ever returned.", slow);sleep(1);
@@ -275,8 +252,6 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			printLine();
 			changeBackground("mesaRoom.jpg");
 			music.stopCurrentSong();
-			//song = music.mesaRoom;
-			//song.loop();
 			music.switchSong(music.mesaRoom);
 			sleep(2);
 			printLine();
@@ -359,7 +334,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 						break;	
 				}     
 			
-			//music.northPlaza.loop();
+			music.switchSong(music.northPlaza);
 			say("Bob's Ghost", "...You'll pay....", 2);
 			ss2("Was..", "was that Bob??"); sleep(1);
 			ss3("I think so,"," a ghost version of him at least.");
@@ -437,9 +412,8 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			pauseSay("Yuga", "Now then, will you all be joining me", ", or will I have to drag all of you there myself?", normal);
 			
 			s3("We'd like to see you try.");
-			song.stop();
 			party.addChar(chooseYourCharacter("Who will help??"));
-			song = music.yugaTheme2;
+			music.switchSong(music.yugaTheme2);
 			partyBattle(yuga, true);
 			
 			printLine();
@@ -455,7 +429,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			ghost.showSprite = false;
 			printLine();
 			basement();
-			//ChapterOne();
+			// TODO: ChapterOne();
 
 			            																																	
 			sleep(5);
@@ -616,7 +590,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 					case 0: 	say(name, "Ah yes, I'll have a burrito please!",3);
 								say("Chipotle Worker", "Sure! that'll be $5.46",3);
 								printLine("             **You paid $5.46**");
-								//music.SFXitemGet.play();
+								music.itemGet();
 								printLine(); 
 								printLine("          ***You got a Burrito!***"); 
 								printLine(); 
@@ -630,7 +604,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 					case 1:	    say(name, "Ah yes, i'll have a quesadilla please!",3);
 								say("Chipotle Worker", "Sure! that'll be $4.37",3);
 								printLine("              **You paid $4.37**");
-								//music.SFXitemGet.play();
+								music.itemGet();
 								printLine(); 
 								printLine("          ***You got a Quesadilla!***"); 
 								printLine(); 
@@ -643,7 +617,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 					case 2: 	say(name, "Ah yes, i'll have the nachos please!",3);
 								say("Chipotle Worker", "Sure! that'll be $3.83",3);
 								printLine("              **You paid $3.83**");
-								//music.SFXitemGet.play();
+								music.itemGet();
 								printLine(); 
 								printLine("          ***You got Zesty Nachos!***"); 
 								printLine(); 
@@ -701,7 +675,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 				say(Matt, "O_O",1);
 				say(Sebas, "O___O'",1);
 				say(name, "What the..",1);
-				//music.northPlaza.stop();
+				music.northPlaza.stop();
 				partyBattle(ghost, false);
 			//Story goes back to Prologue
 			
@@ -851,7 +825,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 				case 0: 	say(name, "Ah yes, I'll have an Espresso please!",3);
 							say("Barista", "Sure! that'll be $3.27",3);
 							printLine("             **You paid $3.27**");
-							//music.SFXitemGet.play();
+							music.itemGet();
 							printLine(); 
 							sleep(1);
 							money -= 3.27;
@@ -868,7 +842,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 							say("Barista", "Sure! that'll be $4.37",3);
 							printLine("              **You paid $4.37**");
 							sleep(1);
-							//music.SFXitemGet.play();
+							music.itemGet();
 							printLine(); 
 							money-=4.37;
 							item1 = "Hot Chocolate";
@@ -886,7 +860,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 							printLine("              **You paid $6.02**");
 							money -= 6.02;
 							item1 = "White Velvet";
-							//music.SFXitemGet.play(); sleep(1);
+							music.itemGet(); sleep(1);
 							printLine(); 
 							printLine("          ***You got White Velvet!***"); 
 							printLine(); 
@@ -901,7 +875,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 							printLine("              **You paid $5.48**");
 							money -= 5.48;
 							item1 = "Strawberry Frapuccino";
-							//music.SFXitemGet.play(); sleep(1);
+							music.itemGet(); sleep(1);
 							printLine(); 
 							printLine("          ***You got Strawberry Frapuccino!***"); 
 							printLine(); 
@@ -1383,7 +1357,6 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 			
 			boolean won = false; //default, not final
 			chooseFighter(party); 
-			song.stop(); //stops the song playing
 			battleInProgress = true; 
 			
 			if(party.party.size() == 1){
@@ -1391,7 +1364,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 					ehpColor = Color.green;
 					battleInProgress = false;
 					sleep(1);
-					song.loop(Clip.LOOP_CONTINUOUSLY); //starts looping the story song playing before the battle
+					//song.loop(Clip.LOOP_CONTINUOUSLY); //starts looping the story song playing before the battle
 					php = 0;
 					ehp = 0;
 					won = true;
@@ -1420,7 +1393,7 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 
 					battleInProgress = false;
 					sleep(1);
-					song.loop(Clip.LOOP_CONTINUOUSLY);
+					//song.loop(Clip.LOOP_CONTINUOUSLY);
 					php = 0;
 					ehp = 0;
 					return won;
@@ -1545,7 +1518,6 @@ public class MainWindow extends GWindowEventAdapter implements KeyListener {
 		
 		public void switchSong(Clip newSong, String background){
 			sleep(1);
-			song.stop();
 			changeBackground(background);
 			music.playDoor();
 			sleep(2);
